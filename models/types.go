@@ -1,0 +1,206 @@
+package models
+
+type MaybeInaccessibleMessageType int
+
+const (
+	MaybeInaccessibleMessageTypeMessage MaybeInaccessibleMessageType = iota
+	MaybeInaccessibleMessageTypeInaccessibleMessage
+)
+
+type MessageOriginType int
+
+const (
+	MessageOriginTypeMessageOriginUser MessageOriginType = iota
+	MessageOriginTypeMessageOriginHiddenUser
+	MessageOriginTypeMessageOriginChat
+	MessageOriginTypeMessageOriginChannel
+)
+
+type PaidMediaType int
+
+const (
+	PaidMediaTypePaidMediaPreview PaidMediaType = iota
+	PaidMediaTypePaidMediaPhoto
+	PaidMediaTypePaidMediaVideo
+)
+
+type BackgroundFillType int
+
+const (
+	BackgroundFillTypeBackgroundFillSolid BackgroundFillType = iota
+	BackgroundFillTypeBackgroundFillGradient
+	BackgroundFillTypeBackgroundFillFreeformGradient
+)
+
+type BackgroundTypeType int
+
+const (
+	BackgroundTypeTypeBackgroundTypeFill BackgroundTypeType = iota
+	BackgroundTypeTypeBackgroundTypeWallpaper
+	BackgroundTypeTypeBackgroundTypePattern
+	BackgroundTypeTypeBackgroundTypeChatTheme
+)
+
+type ChatMemberType int
+
+const (
+	ChatMemberTypeChatMemberOwner ChatMemberType = iota
+	ChatMemberTypeChatMemberAdministrator
+	ChatMemberTypeChatMemberMember
+	ChatMemberTypeChatMemberRestricted
+	ChatMemberTypeChatMemberLeft
+	ChatMemberTypeChatMemberBanned
+)
+
+type StoryAreaTypeType int
+
+const (
+	StoryAreaTypeTypeStoryAreaTypeLocation StoryAreaTypeType = iota
+	StoryAreaTypeTypeStoryAreaTypeSuggestedReaction
+	StoryAreaTypeTypeStoryAreaTypeLink
+	StoryAreaTypeTypeStoryAreaTypeWeather
+	StoryAreaTypeTypeStoryAreaTypeUniqueGift
+)
+
+type ReactionTypeType int
+
+const (
+	ReactionTypeTypeReactionTypeEmoji ReactionTypeType = iota
+	ReactionTypeTypeReactionTypeCustomEmoji
+	ReactionTypeTypeReactionTypePaid
+)
+
+type OwnedGiftType int
+
+const (
+	OwnedGiftTypeOwnedGiftRegular OwnedGiftType = iota
+	OwnedGiftTypeOwnedGiftUnique
+)
+
+type BotCommandScopeType int
+
+const (
+	BotCommandScopeTypeBotCommandScopeDefault BotCommandScopeType = iota
+	BotCommandScopeTypeBotCommandScopeAllPrivateChats
+	BotCommandScopeTypeBotCommandScopeAllGroupChats
+	BotCommandScopeTypeBotCommandScopeAllChatAdministrators
+	BotCommandScopeTypeBotCommandScopeChat
+	BotCommandScopeTypeBotCommandScopeChatAdministrators
+	BotCommandScopeTypeBotCommandScopeChatMember
+)
+
+type MenuButtonType int
+
+const (
+	MenuButtonTypeMenuButtonCommands MenuButtonType = iota
+	MenuButtonTypeMenuButtonWebApp
+	MenuButtonTypeMenuButtonDefault
+)
+
+type ChatBoostSourceType int
+
+const (
+	ChatBoostSourceTypeChatBoostSourcePremium ChatBoostSourceType = iota
+	ChatBoostSourceTypeChatBoostSourceGiftCode
+	ChatBoostSourceTypeChatBoostSourceGiveaway
+)
+
+type InputMediaType int
+
+const (
+	InputMediaTypeInputMediaAnimation InputMediaType = iota
+	InputMediaTypeInputMediaDocument
+	InputMediaTypeInputMediaAudio
+	InputMediaTypeInputMediaPhoto
+	InputMediaTypeInputMediaVideo
+)
+
+type InputPaidMediaType int
+
+const (
+	InputPaidMediaTypeInputPaidMediaPhoto InputPaidMediaType = iota
+	InputPaidMediaTypeInputPaidMediaVideo
+)
+
+type InputProfilePhotoType int
+
+const (
+	InputProfilePhotoTypeInputProfilePhotoStatic InputProfilePhotoType = iota
+	InputProfilePhotoTypeInputProfilePhotoAnimated
+)
+
+type InputStoryContentType int
+
+const (
+	InputStoryContentTypeInputStoryContentPhoto InputStoryContentType = iota
+	InputStoryContentTypeInputStoryContentVideo
+)
+
+type InlineQueryResultType int
+
+const (
+	InlineQueryResultTypeInlineQueryResultCachedAudio InlineQueryResultType = iota
+	InlineQueryResultTypeInlineQueryResultCachedDocument
+	InlineQueryResultTypeInlineQueryResultCachedGif
+	InlineQueryResultTypeInlineQueryResultCachedMpeg4Gif
+	InlineQueryResultTypeInlineQueryResultCachedPhoto
+	InlineQueryResultTypeInlineQueryResultCachedSticker
+	InlineQueryResultTypeInlineQueryResultCachedVideo
+	InlineQueryResultTypeInlineQueryResultCachedVoice
+	InlineQueryResultTypeInlineQueryResultArticle
+	InlineQueryResultTypeInlineQueryResultAudio
+	InlineQueryResultTypeInlineQueryResultContact
+	InlineQueryResultTypeInlineQueryResultGame
+	InlineQueryResultTypeInlineQueryResultDocument
+	InlineQueryResultTypeInlineQueryResultGif
+	InlineQueryResultTypeInlineQueryResultLocation
+	InlineQueryResultTypeInlineQueryResultMpeg4Gif
+	InlineQueryResultTypeInlineQueryResultPhoto
+	InlineQueryResultTypeInlineQueryResultVenue
+	InlineQueryResultTypeInlineQueryResultVideo
+	InlineQueryResultTypeInlineQueryResultVoice
+)
+
+type InputMessageContentType int
+
+const (
+	InputMessageContentTypeInputTextMessageContent InputMessageContentType = iota
+	InputMessageContentTypeInputLocationMessageContent
+	InputMessageContentTypeInputVenueMessageContent
+	InputMessageContentTypeInputContactMessageContent
+	InputMessageContentTypeInputInvoiceMessageContent
+)
+
+type RevenueWithdrawalStateType int
+
+const (
+	RevenueWithdrawalStateTypeRevenueWithdrawalStatePending RevenueWithdrawalStateType = iota
+	RevenueWithdrawalStateTypeRevenueWithdrawalStateSucceeded
+	RevenueWithdrawalStateTypeRevenueWithdrawalStateFailed
+)
+
+type TransactionPartnerType int
+
+const (
+	TransactionPartnerTypeTransactionPartnerUser TransactionPartnerType = iota
+	TransactionPartnerTypeTransactionPartnerChat
+	TransactionPartnerTypeTransactionPartnerAffiliateProgram
+	TransactionPartnerTypeTransactionPartnerFragment
+	TransactionPartnerTypeTransactionPartnerTelegramAds
+	TransactionPartnerTypeTransactionPartnerTelegramApi
+	TransactionPartnerTypeTransactionPartnerOther
+)
+
+type PassportElementErrorType int
+
+const (
+	PassportElementErrorTypePassportElementErrorDataField PassportElementErrorType = iota
+	PassportElementErrorTypePassportElementErrorFrontSide
+	PassportElementErrorTypePassportElementErrorReverseSide
+	PassportElementErrorTypePassportElementErrorSelfie
+	PassportElementErrorTypePassportElementErrorFile
+	PassportElementErrorTypePassportElementErrorFiles
+	PassportElementErrorTypePassportElementErrorTranslationFile
+	PassportElementErrorTypePassportElementErrorTranslationFiles
+	PassportElementErrorTypePassportElementErrorUnspecified
+)
