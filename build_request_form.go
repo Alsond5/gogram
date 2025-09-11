@@ -3,10 +3,13 @@ package gogram
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"io"
 	"mime/multipart"
 	"reflect"
 	"strings"
+
+	"github.com/Alsond5/gogram/models"
 )
 
 func writeParamsToForm[T any](form *multipart.Writer, params *T) error {
@@ -32,6 +35,10 @@ func writeParamsToForm[T any](form *multipart.Writer, params *T) error {
 		switch vv := v.Field(i).Interface().(type) {
 		case string:
 			err = addFormFieldString(form, fieldName, vv)
+		case *models.InputFileUpload:
+			err = addFormFieldInputFileUpload(form, fieldName, vv)
+		case *models.InputFileString:
+			err = addFormFieldString(form, fieldName, vv.Data)
 		default:
 			err = addFormFieldDefault(form, fieldName, vv)
 		}
@@ -42,6 +49,20 @@ func writeParamsToForm[T any](form *multipart.Writer, params *T) error {
 	}
 
 	return nil
+}
+
+func addFormFieldInputFileUpload(form *multipart.Writer, fieldName string, value *models.InputFileUpload) error {
+	if value.Data == nil {
+		return fmt.Errorf("nil data for field %s", fieldName)
+	}
+
+	w, err := form.CreateFormFile(fieldName, value.Filename)
+	if err != nil {
+		return err
+	}
+
+	_, err = io.Copy(w, value.Data)
+	return err
 }
 
 func addFormFieldDefault(form *multipart.Writer, fieldName string, value any) error {

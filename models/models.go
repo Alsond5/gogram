@@ -1596,7 +1596,9 @@ type InputMediaDocument struct {
 	DisableContentTypeDetection bool            `json:"disable_content_type_detection,omitempty"`
 }
 
-type InputFile struct{}
+type InputFile interface {
+	isInputFile()
+}
 
 // contains subtypes
 type InputPaidMedia struct {

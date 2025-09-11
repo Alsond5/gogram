@@ -6,7 +6,7 @@ type CommandOption func(*commandConfig)
 
 type commandConfig struct {
 	languageCode string
-	scope        *models.BotCommandScope
+	scope        models.BotCommandScope
 }
 
 func WithLanguage(languageCode string) CommandOption {
@@ -15,7 +15,7 @@ func WithLanguage(languageCode string) CommandOption {
 	}
 }
 
-func WithScope(scope *models.BotCommandScope) CommandOption {
+func WithScope(scope models.BotCommandScope) CommandOption {
 	return func(cc *commandConfig) {
 		cc.scope = scope
 	}

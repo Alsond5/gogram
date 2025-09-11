@@ -8,13 +8,13 @@ type GetUpdatesRequest struct {
 }
 
 type SetWebhookRequest struct {
-	Url                string     `json:"url"`
-	Certificate        *InputFile `json:"certificate,omitempty"`
-	IpAddress          string     `json:"ip_address,omitempty"`
-	MaxConnections     int64      `json:"max_connections,omitempty"`
-	AllowedUpdates     []string   `json:"allowed_updates,omitempty"`
-	DropPendingUpdates bool       `json:"drop_pending_updates,omitempty"`
-	SecretToken        string     `json:"secret_token,omitempty"`
+	Url                string    `json:"url"`
+	Certificate        InputFile `json:"certificate,omitempty"`
+	IpAddress          string    `json:"ip_address,omitempty"`
+	MaxConnections     int64     `json:"max_connections,omitempty"`
+	AllowedUpdates     []string  `json:"allowed_updates,omitempty"`
+	DropPendingUpdates bool      `json:"drop_pending_updates,omitempty"`
+	SecretToken        string    `json:"secret_token,omitempty"`
 }
 
 type DeleteWebhookRequest struct {
@@ -23,7 +23,7 @@ type DeleteWebhookRequest struct {
 
 type SendMessageRequest struct {
 	BusinessConnectionId    string                   `json:"business_connection_id,omitempty"`
-	ChatId                  any                      `json:"chat_id"`
+	ChatId                  interface{}              `json:"chat_id"`
 	MessageThreadId         int64                    `json:"message_thread_id,omitempty"`
 	DirectMessagesTopicId   int64                    `json:"direct_messages_topic_id,omitempty"`
 	Text                    string                   `json:"text"`
@@ -36,14 +36,14 @@ type SendMessageRequest struct {
 	MessageEffectId         string                   `json:"message_effect_id,omitempty"`
 	SuggestedPostParameters *SuggestedPostParameters `json:"suggested_post_parameters,omitempty"`
 	ReplyParameters         *ReplyParameters         `json:"reply_parameters,omitempty"`
-	ReplyMarkup             any                      `json:"reply_markup,omitempty"`
+	ReplyMarkup             interface{}              `json:"reply_markup,omitempty"`
 }
 
 type ForwardMessageRequest struct {
-	ChatId                  any                      `json:"chat_id"`
+	ChatId                  interface{}              `json:"chat_id"`
 	MessageThreadId         int64                    `json:"message_thread_id,omitempty"`
 	DirectMessagesTopicId   int64                    `json:"direct_messages_topic_id,omitempty"`
-	FromChatId              any                      `json:"from_chat_id"`
+	FromChatId              interface{}              `json:"from_chat_id"`
 	VideoStartTimestamp     int64                    `json:"video_start_timestamp,omitempty"`
 	DisableNotification     bool                     `json:"disable_notification,omitempty"`
 	ProtectContent          bool                     `json:"protect_content,omitempty"`
@@ -52,20 +52,20 @@ type ForwardMessageRequest struct {
 }
 
 type ForwardMessagesRequest struct {
-	ChatId                any     `json:"chat_id"`
-	MessageThreadId       int64   `json:"message_thread_id,omitempty"`
-	DirectMessagesTopicId int64   `json:"direct_messages_topic_id,omitempty"`
-	FromChatId            any     `json:"from_chat_id"`
-	MessageIds            []int64 `json:"message_ids"`
-	DisableNotification   bool    `json:"disable_notification,omitempty"`
-	ProtectContent        bool    `json:"protect_content,omitempty"`
+	ChatId                interface{} `json:"chat_id"`
+	MessageThreadId       int64       `json:"message_thread_id,omitempty"`
+	DirectMessagesTopicId int64       `json:"direct_messages_topic_id,omitempty"`
+	FromChatId            interface{} `json:"from_chat_id"`
+	MessageIds            []int64     `json:"message_ids"`
+	DisableNotification   bool        `json:"disable_notification,omitempty"`
+	ProtectContent        bool        `json:"protect_content,omitempty"`
 }
 
 type CopyMessageRequest struct {
-	ChatId                  any                      `json:"chat_id"`
+	ChatId                  interface{}              `json:"chat_id"`
 	MessageThreadId         int64                    `json:"message_thread_id,omitempty"`
 	DirectMessagesTopicId   int64                    `json:"direct_messages_topic_id,omitempty"`
-	FromChatId              any                      `json:"from_chat_id"`
+	FromChatId              interface{}              `json:"from_chat_id"`
 	MessageId               int64                    `json:"message_id"`
 	VideoStartTimestamp     int64                    `json:"video_start_timestamp,omitempty"`
 	Caption                 string                   `json:"caption,omitempty"`
@@ -77,26 +77,26 @@ type CopyMessageRequest struct {
 	AllowPaidBroadcast      bool                     `json:"allow_paid_broadcast,omitempty"`
 	SuggestedPostParameters *SuggestedPostParameters `json:"suggested_post_parameters,omitempty"`
 	ReplyParameters         *ReplyParameters         `json:"reply_parameters,omitempty"`
-	ReplyMarkup             any                      `json:"reply_markup,omitempty"`
+	ReplyMarkup             interface{}              `json:"reply_markup,omitempty"`
 }
 
 type CopyMessagesRequest struct {
-	ChatId                any     `json:"chat_id"`
-	MessageThreadId       int64   `json:"message_thread_id,omitempty"`
-	DirectMessagesTopicId int64   `json:"direct_messages_topic_id,omitempty"`
-	FromChatId            any     `json:"from_chat_id"`
-	MessageIds            []int64 `json:"message_ids"`
-	DisableNotification   bool    `json:"disable_notification,omitempty"`
-	ProtectContent        bool    `json:"protect_content,omitempty"`
-	RemoveCaption         bool    `json:"remove_caption,omitempty"`
+	ChatId                interface{} `json:"chat_id"`
+	MessageThreadId       int64       `json:"message_thread_id,omitempty"`
+	DirectMessagesTopicId int64       `json:"direct_messages_topic_id,omitempty"`
+	FromChatId            interface{} `json:"from_chat_id"`
+	MessageIds            []int64     `json:"message_ids"`
+	DisableNotification   bool        `json:"disable_notification,omitempty"`
+	ProtectContent        bool        `json:"protect_content,omitempty"`
+	RemoveCaption         bool        `json:"remove_caption,omitempty"`
 }
 
 type SendPhotoRequest struct {
 	BusinessConnectionId    string                   `json:"business_connection_id,omitempty"`
-	ChatId                  any                      `json:"chat_id"`
+	ChatId                  interface{}              `json:"chat_id"`
 	MessageThreadId         int64                    `json:"message_thread_id,omitempty"`
 	DirectMessagesTopicId   int64                    `json:"direct_messages_topic_id,omitempty"`
-	Photo                   any                      `json:"photo"`
+	Photo                   InputFile                `json:"photo"`
 	Caption                 string                   `json:"caption,omitempty"`
 	ParseMode               string                   `json:"parse_mode,omitempty"`
 	CaptionEntities         []MessageEntity          `json:"caption_entities,omitempty"`
@@ -108,38 +108,38 @@ type SendPhotoRequest struct {
 	MessageEffectId         string                   `json:"message_effect_id,omitempty"`
 	SuggestedPostParameters *SuggestedPostParameters `json:"suggested_post_parameters,omitempty"`
 	ReplyParameters         *ReplyParameters         `json:"reply_parameters,omitempty"`
-	ReplyMarkup             any                      `json:"reply_markup,omitempty"`
+	ReplyMarkup             interface{}              `json:"reply_markup,omitempty"`
 }
 
 type SendAudioRequest struct {
 	BusinessConnectionId    string                   `json:"business_connection_id,omitempty"`
-	ChatId                  any                      `json:"chat_id"`
+	ChatId                  interface{}              `json:"chat_id"`
 	MessageThreadId         int64                    `json:"message_thread_id,omitempty"`
 	DirectMessagesTopicId   int64                    `json:"direct_messages_topic_id,omitempty"`
-	Audio                   any                      `json:"audio"`
+	Audio                   InputFile                `json:"audio"`
 	Caption                 string                   `json:"caption,omitempty"`
 	ParseMode               string                   `json:"parse_mode,omitempty"`
 	CaptionEntities         []MessageEntity          `json:"caption_entities,omitempty"`
 	Duration                int64                    `json:"duration,omitempty"`
 	Performer               string                   `json:"performer,omitempty"`
 	Title                   string                   `json:"title,omitempty"`
-	Thumbnail               any                      `json:"thumbnail,omitempty"`
+	Thumbnail               InputFile                `json:"thumbnail,omitempty"`
 	DisableNotification     bool                     `json:"disable_notification,omitempty"`
 	ProtectContent          bool                     `json:"protect_content,omitempty"`
 	AllowPaidBroadcast      bool                     `json:"allow_paid_broadcast,omitempty"`
 	MessageEffectId         string                   `json:"message_effect_id,omitempty"`
 	SuggestedPostParameters *SuggestedPostParameters `json:"suggested_post_parameters,omitempty"`
 	ReplyParameters         *ReplyParameters         `json:"reply_parameters,omitempty"`
-	ReplyMarkup             any                      `json:"reply_markup,omitempty"`
+	ReplyMarkup             interface{}              `json:"reply_markup,omitempty"`
 }
 
 type SendDocumentRequest struct {
 	BusinessConnectionId        string                   `json:"business_connection_id,omitempty"`
-	ChatId                      any                      `json:"chat_id"`
+	ChatId                      interface{}              `json:"chat_id"`
 	MessageThreadId             int64                    `json:"message_thread_id,omitempty"`
 	DirectMessagesTopicId       int64                    `json:"direct_messages_topic_id,omitempty"`
-	Document                    any                      `json:"document"`
-	Thumbnail                   any                      `json:"thumbnail,omitempty"`
+	Document                    InputFile                `json:"document"`
+	Thumbnail                   InputFile                `json:"thumbnail,omitempty"`
 	Caption                     string                   `json:"caption,omitempty"`
 	ParseMode                   string                   `json:"parse_mode,omitempty"`
 	CaptionEntities             []MessageEntity          `json:"caption_entities,omitempty"`
@@ -150,20 +150,20 @@ type SendDocumentRequest struct {
 	MessageEffectId             string                   `json:"message_effect_id,omitempty"`
 	SuggestedPostParameters     *SuggestedPostParameters `json:"suggested_post_parameters,omitempty"`
 	ReplyParameters             *ReplyParameters         `json:"reply_parameters,omitempty"`
-	ReplyMarkup                 any                      `json:"reply_markup,omitempty"`
+	ReplyMarkup                 interface{}              `json:"reply_markup,omitempty"`
 }
 
 type SendVideoRequest struct {
 	BusinessConnectionId    string                   `json:"business_connection_id,omitempty"`
-	ChatId                  any                      `json:"chat_id"`
+	ChatId                  interface{}              `json:"chat_id"`
 	MessageThreadId         int64                    `json:"message_thread_id,omitempty"`
 	DirectMessagesTopicId   int64                    `json:"direct_messages_topic_id,omitempty"`
-	Video                   any                      `json:"video"`
+	Video                   InputFile                `json:"video"`
 	Duration                int64                    `json:"duration,omitempty"`
 	Width                   int64                    `json:"width,omitempty"`
 	Height                  int64                    `json:"height,omitempty"`
-	Thumbnail               any                      `json:"thumbnail,omitempty"`
-	Cover                   any                      `json:"cover,omitempty"`
+	Thumbnail               InputFile                `json:"thumbnail,omitempty"`
+	Cover                   InputFile                `json:"cover,omitempty"`
 	StartTimestamp          int64                    `json:"start_timestamp,omitempty"`
 	Caption                 string                   `json:"caption,omitempty"`
 	ParseMode               string                   `json:"parse_mode,omitempty"`
@@ -177,19 +177,19 @@ type SendVideoRequest struct {
 	MessageEffectId         string                   `json:"message_effect_id,omitempty"`
 	SuggestedPostParameters *SuggestedPostParameters `json:"suggested_post_parameters,omitempty"`
 	ReplyParameters         *ReplyParameters         `json:"reply_parameters,omitempty"`
-	ReplyMarkup             any                      `json:"reply_markup,omitempty"`
+	ReplyMarkup             interface{}              `json:"reply_markup,omitempty"`
 }
 
 type SendAnimationRequest struct {
 	BusinessConnectionId    string                   `json:"business_connection_id,omitempty"`
-	ChatId                  any                      `json:"chat_id"`
+	ChatId                  interface{}              `json:"chat_id"`
 	MessageThreadId         int64                    `json:"message_thread_id,omitempty"`
 	DirectMessagesTopicId   int64                    `json:"direct_messages_topic_id,omitempty"`
-	Animation               any                      `json:"animation"`
+	Animation               InputFile                `json:"animation"`
 	Duration                int64                    `json:"duration,omitempty"`
 	Width                   int64                    `json:"width,omitempty"`
 	Height                  int64                    `json:"height,omitempty"`
-	Thumbnail               any                      `json:"thumbnail,omitempty"`
+	Thumbnail               InputFile                `json:"thumbnail,omitempty"`
 	Caption                 string                   `json:"caption,omitempty"`
 	ParseMode               string                   `json:"parse_mode,omitempty"`
 	CaptionEntities         []MessageEntity          `json:"caption_entities,omitempty"`
@@ -201,15 +201,15 @@ type SendAnimationRequest struct {
 	MessageEffectId         string                   `json:"message_effect_id,omitempty"`
 	SuggestedPostParameters *SuggestedPostParameters `json:"suggested_post_parameters,omitempty"`
 	ReplyParameters         *ReplyParameters         `json:"reply_parameters,omitempty"`
-	ReplyMarkup             any                      `json:"reply_markup,omitempty"`
+	ReplyMarkup             interface{}              `json:"reply_markup,omitempty"`
 }
 
 type SendVoiceRequest struct {
 	BusinessConnectionId    string                   `json:"business_connection_id,omitempty"`
-	ChatId                  any                      `json:"chat_id"`
+	ChatId                  interface{}              `json:"chat_id"`
 	MessageThreadId         int64                    `json:"message_thread_id,omitempty"`
 	DirectMessagesTopicId   int64                    `json:"direct_messages_topic_id,omitempty"`
-	Voice                   any                      `json:"voice"`
+	Voice                   InputFile                `json:"voice"`
 	Caption                 string                   `json:"caption,omitempty"`
 	ParseMode               string                   `json:"parse_mode,omitempty"`
 	CaptionEntities         []MessageEntity          `json:"caption_entities,omitempty"`
@@ -220,30 +220,30 @@ type SendVoiceRequest struct {
 	MessageEffectId         string                   `json:"message_effect_id,omitempty"`
 	SuggestedPostParameters *SuggestedPostParameters `json:"suggested_post_parameters,omitempty"`
 	ReplyParameters         *ReplyParameters         `json:"reply_parameters,omitempty"`
-	ReplyMarkup             any                      `json:"reply_markup,omitempty"`
+	ReplyMarkup             interface{}              `json:"reply_markup,omitempty"`
 }
 
 type SendVideoNoteRequest struct {
 	BusinessConnectionId    string                   `json:"business_connection_id,omitempty"`
-	ChatId                  any                      `json:"chat_id"`
+	ChatId                  interface{}              `json:"chat_id"`
 	MessageThreadId         int64                    `json:"message_thread_id,omitempty"`
 	DirectMessagesTopicId   int64                    `json:"direct_messages_topic_id,omitempty"`
-	VideoNote               any                      `json:"video_note"`
+	VideoNote               InputFile                `json:"video_note"`
 	Duration                int64                    `json:"duration,omitempty"`
 	Length                  int64                    `json:"length,omitempty"`
-	Thumbnail               any                      `json:"thumbnail,omitempty"`
+	Thumbnail               InputFile                `json:"thumbnail,omitempty"`
 	DisableNotification     bool                     `json:"disable_notification,omitempty"`
 	ProtectContent          bool                     `json:"protect_content,omitempty"`
 	AllowPaidBroadcast      bool                     `json:"allow_paid_broadcast,omitempty"`
 	MessageEffectId         string                   `json:"message_effect_id,omitempty"`
 	SuggestedPostParameters *SuggestedPostParameters `json:"suggested_post_parameters,omitempty"`
 	ReplyParameters         *ReplyParameters         `json:"reply_parameters,omitempty"`
-	ReplyMarkup             any                      `json:"reply_markup,omitempty"`
+	ReplyMarkup             interface{}              `json:"reply_markup,omitempty"`
 }
 
 type SendPaidMediaRequest struct {
 	BusinessConnectionId    string                   `json:"business_connection_id,omitempty"`
-	ChatId                  any                      `json:"chat_id"`
+	ChatId                  interface{}              `json:"chat_id"`
 	MessageThreadId         int64                    `json:"message_thread_id,omitempty"`
 	DirectMessagesTopicId   int64                    `json:"direct_messages_topic_id,omitempty"`
 	StarCount               int64                    `json:"star_count"`
@@ -258,15 +258,15 @@ type SendPaidMediaRequest struct {
 	AllowPaidBroadcast      bool                     `json:"allow_paid_broadcast,omitempty"`
 	SuggestedPostParameters *SuggestedPostParameters `json:"suggested_post_parameters,omitempty"`
 	ReplyParameters         *ReplyParameters         `json:"reply_parameters,omitempty"`
-	ReplyMarkup             any                      `json:"reply_markup,omitempty"`
+	ReplyMarkup             interface{}              `json:"reply_markup,omitempty"`
 }
 
 type SendMediaGroupRequest struct {
 	BusinessConnectionId  string           `json:"business_connection_id,omitempty"`
-	ChatId                any              `json:"chat_id"`
+	ChatId                interface{}      `json:"chat_id"`
 	MessageThreadId       int64            `json:"message_thread_id,omitempty"`
 	DirectMessagesTopicId int64            `json:"direct_messages_topic_id,omitempty"`
-	Media                 any              `json:"media"`
+	Media                 interface{}      `json:"media"`
 	DisableNotification   bool             `json:"disable_notification,omitempty"`
 	ProtectContent        bool             `json:"protect_content,omitempty"`
 	AllowPaidBroadcast    bool             `json:"allow_paid_broadcast,omitempty"`
@@ -276,7 +276,7 @@ type SendMediaGroupRequest struct {
 
 type SendLocationRequest struct {
 	BusinessConnectionId    string                   `json:"business_connection_id,omitempty"`
-	ChatId                  any                      `json:"chat_id"`
+	ChatId                  interface{}              `json:"chat_id"`
 	MessageThreadId         int64                    `json:"message_thread_id,omitempty"`
 	DirectMessagesTopicId   int64                    `json:"direct_messages_topic_id,omitempty"`
 	Latitude                float64                  `json:"latitude"`
@@ -291,12 +291,12 @@ type SendLocationRequest struct {
 	MessageEffectId         string                   `json:"message_effect_id,omitempty"`
 	SuggestedPostParameters *SuggestedPostParameters `json:"suggested_post_parameters,omitempty"`
 	ReplyParameters         *ReplyParameters         `json:"reply_parameters,omitempty"`
-	ReplyMarkup             any                      `json:"reply_markup,omitempty"`
+	ReplyMarkup             interface{}              `json:"reply_markup,omitempty"`
 }
 
 type SendVenueRequest struct {
 	BusinessConnectionId    string                   `json:"business_connection_id,omitempty"`
-	ChatId                  any                      `json:"chat_id"`
+	ChatId                  interface{}              `json:"chat_id"`
 	MessageThreadId         int64                    `json:"message_thread_id,omitempty"`
 	DirectMessagesTopicId   int64                    `json:"direct_messages_topic_id,omitempty"`
 	Latitude                float64                  `json:"latitude"`
@@ -313,12 +313,12 @@ type SendVenueRequest struct {
 	MessageEffectId         string                   `json:"message_effect_id,omitempty"`
 	SuggestedPostParameters *SuggestedPostParameters `json:"suggested_post_parameters,omitempty"`
 	ReplyParameters         *ReplyParameters         `json:"reply_parameters,omitempty"`
-	ReplyMarkup             any                      `json:"reply_markup,omitempty"`
+	ReplyMarkup             interface{}              `json:"reply_markup,omitempty"`
 }
 
 type SendContactRequest struct {
 	BusinessConnectionId    string                   `json:"business_connection_id,omitempty"`
-	ChatId                  any                      `json:"chat_id"`
+	ChatId                  interface{}              `json:"chat_id"`
 	MessageThreadId         int64                    `json:"message_thread_id,omitempty"`
 	DirectMessagesTopicId   int64                    `json:"direct_messages_topic_id,omitempty"`
 	PhoneNumber             string                   `json:"phone_number"`
@@ -331,12 +331,12 @@ type SendContactRequest struct {
 	MessageEffectId         string                   `json:"message_effect_id,omitempty"`
 	SuggestedPostParameters *SuggestedPostParameters `json:"suggested_post_parameters,omitempty"`
 	ReplyParameters         *ReplyParameters         `json:"reply_parameters,omitempty"`
-	ReplyMarkup             any                      `json:"reply_markup,omitempty"`
+	ReplyMarkup             interface{}              `json:"reply_markup,omitempty"`
 }
 
 type SendPollRequest struct {
 	BusinessConnectionId  string            `json:"business_connection_id,omitempty"`
-	ChatId                any               `json:"chat_id"`
+	ChatId                interface{}       `json:"chat_id"`
 	MessageThreadId       int64             `json:"message_thread_id,omitempty"`
 	Question              string            `json:"question"`
 	QuestionParseMode     string            `json:"question_parse_mode,omitempty"`
@@ -357,7 +357,7 @@ type SendPollRequest struct {
 	AllowPaidBroadcast    bool              `json:"allow_paid_broadcast,omitempty"`
 	MessageEffectId       string            `json:"message_effect_id,omitempty"`
 	ReplyParameters       *ReplyParameters  `json:"reply_parameters,omitempty"`
-	ReplyMarkup           any               `json:"reply_markup,omitempty"`
+	ReplyMarkup           interface{}       `json:"reply_markup,omitempty"`
 }
 
 type SendChecklistRequest struct {
@@ -373,7 +373,7 @@ type SendChecklistRequest struct {
 
 type SendDiceRequest struct {
 	BusinessConnectionId    string                   `json:"business_connection_id,omitempty"`
-	ChatId                  any                      `json:"chat_id"`
+	ChatId                  interface{}              `json:"chat_id"`
 	MessageThreadId         int64                    `json:"message_thread_id,omitempty"`
 	DirectMessagesTopicId   int64                    `json:"direct_messages_topic_id,omitempty"`
 	Emoji                   string                   `json:"emoji,omitempty"`
@@ -383,18 +383,18 @@ type SendDiceRequest struct {
 	MessageEffectId         string                   `json:"message_effect_id,omitempty"`
 	SuggestedPostParameters *SuggestedPostParameters `json:"suggested_post_parameters,omitempty"`
 	ReplyParameters         *ReplyParameters         `json:"reply_parameters,omitempty"`
-	ReplyMarkup             any                      `json:"reply_markup,omitempty"`
+	ReplyMarkup             interface{}              `json:"reply_markup,omitempty"`
 }
 
 type SendChatActionRequest struct {
-	BusinessConnectionId string `json:"business_connection_id,omitempty"`
-	ChatId               any    `json:"chat_id"`
-	MessageThreadId      int64  `json:"message_thread_id,omitempty"`
-	Action               string `json:"action"`
+	BusinessConnectionId string      `json:"business_connection_id,omitempty"`
+	ChatId               interface{} `json:"chat_id"`
+	MessageThreadId      int64       `json:"message_thread_id,omitempty"`
+	Action               string      `json:"action"`
 }
 
 type SetMessageReactionRequest struct {
-	ChatId    any            `json:"chat_id"`
+	ChatId    interface{}    `json:"chat_id"`
 	MessageId int64          `json:"message_id"`
 	Reaction  []ReactionType `json:"reaction,omitempty"`
 	IsBig     bool           `json:"is_big,omitempty"`
@@ -417,20 +417,20 @@ type GetFileRequest struct {
 }
 
 type BanChatMemberRequest struct {
-	ChatId         any   `json:"chat_id"`
-	UserId         int64 `json:"user_id"`
-	UntilDate      int64 `json:"until_date,omitempty"`
-	RevokeMessages bool  `json:"revoke_messages,omitempty"`
+	ChatId         interface{} `json:"chat_id"`
+	UserId         int64       `json:"user_id"`
+	UntilDate      int64       `json:"until_date,omitempty"`
+	RevokeMessages bool        `json:"revoke_messages,omitempty"`
 }
 
 type UnbanChatMemberRequest struct {
-	ChatId       any   `json:"chat_id"`
-	UserId       int64 `json:"user_id"`
-	OnlyIfBanned bool  `json:"only_if_banned,omitempty"`
+	ChatId       interface{} `json:"chat_id"`
+	UserId       int64       `json:"user_id"`
+	OnlyIfBanned bool        `json:"only_if_banned,omitempty"`
 }
 
 type RestrictChatMemberRequest struct {
-	ChatId                        any              `json:"chat_id"`
+	ChatId                        interface{}      `json:"chat_id"`
 	UserId                        int64            `json:"user_id"`
 	Permissions                   *ChatPermissions `json:"permissions"`
 	UseIndependentChatPermissions bool             `json:"use_independent_chat_permissions,omitempty"`
@@ -438,220 +438,220 @@ type RestrictChatMemberRequest struct {
 }
 
 type PromoteChatMemberRequest struct {
-	ChatId                  any   `json:"chat_id"`
-	UserId                  int64 `json:"user_id"`
-	IsAnonymous             bool  `json:"is_anonymous,omitempty"`
-	CanManageChat           bool  `json:"can_manage_chat,omitempty"`
-	CanDeleteMessages       bool  `json:"can_delete_messages,omitempty"`
-	CanManageVideoChats     bool  `json:"can_manage_video_chats,omitempty"`
-	CanRestrictMembers      bool  `json:"can_restrict_members,omitempty"`
-	CanPromoteMembers       bool  `json:"can_promote_members,omitempty"`
-	CanChangeInfo           bool  `json:"can_change_info,omitempty"`
-	CanInviteUsers          bool  `json:"can_invite_users,omitempty"`
-	CanPostStories          bool  `json:"can_post_stories,omitempty"`
-	CanEditStories          bool  `json:"can_edit_stories,omitempty"`
-	CanDeleteStories        bool  `json:"can_delete_stories,omitempty"`
-	CanPostMessages         bool  `json:"can_post_messages,omitempty"`
-	CanEditMessages         bool  `json:"can_edit_messages,omitempty"`
-	CanPinMessages          bool  `json:"can_pin_messages,omitempty"`
-	CanManageTopics         bool  `json:"can_manage_topics,omitempty"`
-	CanManageDirectMessages bool  `json:"can_manage_direct_messages,omitempty"`
+	ChatId                  interface{} `json:"chat_id"`
+	UserId                  int64       `json:"user_id"`
+	IsAnonymous             bool        `json:"is_anonymous,omitempty"`
+	CanManageChat           bool        `json:"can_manage_chat,omitempty"`
+	CanDeleteMessages       bool        `json:"can_delete_messages,omitempty"`
+	CanManageVideoChats     bool        `json:"can_manage_video_chats,omitempty"`
+	CanRestrictMembers      bool        `json:"can_restrict_members,omitempty"`
+	CanPromoteMembers       bool        `json:"can_promote_members,omitempty"`
+	CanChangeInfo           bool        `json:"can_change_info,omitempty"`
+	CanInviteUsers          bool        `json:"can_invite_users,omitempty"`
+	CanPostStories          bool        `json:"can_post_stories,omitempty"`
+	CanEditStories          bool        `json:"can_edit_stories,omitempty"`
+	CanDeleteStories        bool        `json:"can_delete_stories,omitempty"`
+	CanPostMessages         bool        `json:"can_post_messages,omitempty"`
+	CanEditMessages         bool        `json:"can_edit_messages,omitempty"`
+	CanPinMessages          bool        `json:"can_pin_messages,omitempty"`
+	CanManageTopics         bool        `json:"can_manage_topics,omitempty"`
+	CanManageDirectMessages bool        `json:"can_manage_direct_messages,omitempty"`
 }
 
 type SetChatAdministratorCustomTitleRequest struct {
-	ChatId      any    `json:"chat_id"`
-	UserId      int64  `json:"user_id"`
-	CustomTitle string `json:"custom_title"`
+	ChatId      interface{} `json:"chat_id"`
+	UserId      int64       `json:"user_id"`
+	CustomTitle string      `json:"custom_title"`
 }
 
 type BanChatSenderChatRequest struct {
-	ChatId       any   `json:"chat_id"`
-	SenderChatId int64 `json:"sender_chat_id"`
+	ChatId       interface{} `json:"chat_id"`
+	SenderChatId int64       `json:"sender_chat_id"`
 }
 
 type UnbanChatSenderChatRequest struct {
-	ChatId       any   `json:"chat_id"`
-	SenderChatId int64 `json:"sender_chat_id"`
+	ChatId       interface{} `json:"chat_id"`
+	SenderChatId int64       `json:"sender_chat_id"`
 }
 
 type SetChatPermissionsRequest struct {
-	ChatId                        any              `json:"chat_id"`
+	ChatId                        interface{}      `json:"chat_id"`
 	Permissions                   *ChatPermissions `json:"permissions"`
 	UseIndependentChatPermissions bool             `json:"use_independent_chat_permissions,omitempty"`
 }
 
 type ExportChatInviteLinkRequest struct {
-	ChatId any `json:"chat_id"`
+	ChatId interface{} `json:"chat_id"`
 }
 
 type CreateChatInviteLinkRequest struct {
-	ChatId             any    `json:"chat_id"`
-	Name               string `json:"name,omitempty"`
-	ExpireDate         int64  `json:"expire_date,omitempty"`
-	MemberLimit        int64  `json:"member_limit,omitempty"`
-	CreatesJoinRequest bool   `json:"creates_join_request,omitempty"`
+	ChatId             interface{} `json:"chat_id"`
+	Name               string      `json:"name,omitempty"`
+	ExpireDate         int64       `json:"expire_date,omitempty"`
+	MemberLimit        int64       `json:"member_limit,omitempty"`
+	CreatesJoinRequest bool        `json:"creates_join_request,omitempty"`
 }
 
 type EditChatInviteLinkRequest struct {
-	ChatId             any    `json:"chat_id"`
-	InviteLink         string `json:"invite_link"`
-	Name               string `json:"name,omitempty"`
-	ExpireDate         int64  `json:"expire_date,omitempty"`
-	MemberLimit        int64  `json:"member_limit,omitempty"`
-	CreatesJoinRequest bool   `json:"creates_join_request,omitempty"`
+	ChatId             interface{} `json:"chat_id"`
+	InviteLink         string      `json:"invite_link"`
+	Name               string      `json:"name,omitempty"`
+	ExpireDate         int64       `json:"expire_date,omitempty"`
+	MemberLimit        int64       `json:"member_limit,omitempty"`
+	CreatesJoinRequest bool        `json:"creates_join_request,omitempty"`
 }
 
 type CreateChatSubscriptionInviteLinkRequest struct {
-	ChatId             any    `json:"chat_id"`
-	Name               string `json:"name,omitempty"`
-	SubscriptionPeriod int64  `json:"subscription_period"`
-	SubscriptionPrice  int64  `json:"subscription_price"`
+	ChatId             interface{} `json:"chat_id"`
+	Name               string      `json:"name,omitempty"`
+	SubscriptionPeriod int64       `json:"subscription_period"`
+	SubscriptionPrice  int64       `json:"subscription_price"`
 }
 
 type EditChatSubscriptionInviteLinkRequest struct {
-	ChatId     any    `json:"chat_id"`
-	InviteLink string `json:"invite_link"`
-	Name       string `json:"name,omitempty"`
+	ChatId     interface{} `json:"chat_id"`
+	InviteLink string      `json:"invite_link"`
+	Name       string      `json:"name,omitempty"`
 }
 
 type RevokeChatInviteLinkRequest struct {
-	ChatId     any    `json:"chat_id"`
-	InviteLink string `json:"invite_link"`
+	ChatId     interface{} `json:"chat_id"`
+	InviteLink string      `json:"invite_link"`
 }
 
 type ApproveChatJoinRequestRequest struct {
-	ChatId any   `json:"chat_id"`
-	UserId int64 `json:"user_id"`
+	ChatId interface{} `json:"chat_id"`
+	UserId int64       `json:"user_id"`
 }
 
 type DeclineChatJoinRequestRequest struct {
-	ChatId any   `json:"chat_id"`
-	UserId int64 `json:"user_id"`
+	ChatId interface{} `json:"chat_id"`
+	UserId int64       `json:"user_id"`
 }
 
 type SetChatPhotoRequest struct {
-	ChatId any        `json:"chat_id"`
-	Photo  *InputFile `json:"photo"`
+	ChatId interface{} `json:"chat_id"`
+	Photo  InputFile   `json:"photo"`
 }
 
 type DeleteChatPhotoRequest struct {
-	ChatId any `json:"chat_id"`
+	ChatId interface{} `json:"chat_id"`
 }
 
 type SetChatTitleRequest struct {
-	ChatId any    `json:"chat_id"`
-	Title  string `json:"title"`
+	ChatId interface{} `json:"chat_id"`
+	Title  string      `json:"title"`
 }
 
 type SetChatDescriptionRequest struct {
-	ChatId      any    `json:"chat_id"`
-	Description string `json:"description,omitempty"`
+	ChatId      interface{} `json:"chat_id"`
+	Description string      `json:"description,omitempty"`
 }
 
 type PinChatMessageRequest struct {
-	BusinessConnectionId string `json:"business_connection_id,omitempty"`
-	ChatId               any    `json:"chat_id"`
-	MessageId            int64  `json:"message_id"`
-	DisableNotification  bool   `json:"disable_notification,omitempty"`
+	BusinessConnectionId string      `json:"business_connection_id,omitempty"`
+	ChatId               interface{} `json:"chat_id"`
+	MessageId            int64       `json:"message_id"`
+	DisableNotification  bool        `json:"disable_notification,omitempty"`
 }
 
 type UnpinChatMessageRequest struct {
-	BusinessConnectionId string `json:"business_connection_id,omitempty"`
-	ChatId               any    `json:"chat_id"`
-	MessageId            int64  `json:"message_id,omitempty"`
+	BusinessConnectionId string      `json:"business_connection_id,omitempty"`
+	ChatId               interface{} `json:"chat_id"`
+	MessageId            int64       `json:"message_id,omitempty"`
 }
 
 type UnpinAllChatMessagesRequest struct {
-	ChatId any `json:"chat_id"`
+	ChatId interface{} `json:"chat_id"`
 }
 
 type LeaveChatRequest struct {
-	ChatId any `json:"chat_id"`
+	ChatId interface{} `json:"chat_id"`
 }
 
 type GetChatRequest struct {
-	ChatId any `json:"chat_id"`
+	ChatId interface{} `json:"chat_id"`
 }
 
 type GetChatAdministratorsRequest struct {
-	ChatId any `json:"chat_id"`
+	ChatId interface{} `json:"chat_id"`
 }
 
 type GetChatMemberCountRequest struct {
-	ChatId any `json:"chat_id"`
+	ChatId interface{} `json:"chat_id"`
 }
 
 type GetChatMemberRequest struct {
-	ChatId any   `json:"chat_id"`
-	UserId int64 `json:"user_id"`
+	ChatId interface{} `json:"chat_id"`
+	UserId int64       `json:"user_id"`
 }
 
 type SetChatStickerSetRequest struct {
-	ChatId         any    `json:"chat_id"`
-	StickerSetName string `json:"sticker_set_name"`
+	ChatId         interface{} `json:"chat_id"`
+	StickerSetName string      `json:"sticker_set_name"`
 }
 
 type DeleteChatStickerSetRequest struct {
-	ChatId any `json:"chat_id"`
+	ChatId interface{} `json:"chat_id"`
 }
 
 type CreateForumTopicRequest struct {
-	ChatId            any    `json:"chat_id"`
-	Name              string `json:"name"`
-	IconColor         int64  `json:"icon_color,omitempty"`
-	IconCustomEmojiId string `json:"icon_custom_emoji_id,omitempty"`
+	ChatId            interface{} `json:"chat_id"`
+	Name              string      `json:"name"`
+	IconColor         int64       `json:"icon_color,omitempty"`
+	IconCustomEmojiId string      `json:"icon_custom_emoji_id,omitempty"`
 }
 
 type EditForumTopicRequest struct {
-	ChatId            any    `json:"chat_id"`
-	MessageThreadId   int64  `json:"message_thread_id"`
-	Name              string `json:"name,omitempty"`
-	IconCustomEmojiId string `json:"icon_custom_emoji_id,omitempty"`
+	ChatId            interface{} `json:"chat_id"`
+	MessageThreadId   int64       `json:"message_thread_id"`
+	Name              string      `json:"name,omitempty"`
+	IconCustomEmojiId string      `json:"icon_custom_emoji_id,omitempty"`
 }
 
 type CloseForumTopicRequest struct {
-	ChatId          any   `json:"chat_id"`
-	MessageThreadId int64 `json:"message_thread_id"`
+	ChatId          interface{} `json:"chat_id"`
+	MessageThreadId int64       `json:"message_thread_id"`
 }
 
 type ReopenForumTopicRequest struct {
-	ChatId          any   `json:"chat_id"`
-	MessageThreadId int64 `json:"message_thread_id"`
+	ChatId          interface{} `json:"chat_id"`
+	MessageThreadId int64       `json:"message_thread_id"`
 }
 
 type DeleteForumTopicRequest struct {
-	ChatId          any   `json:"chat_id"`
-	MessageThreadId int64 `json:"message_thread_id"`
+	ChatId          interface{} `json:"chat_id"`
+	MessageThreadId int64       `json:"message_thread_id"`
 }
 
 type UnpinAllForumTopicMessagesRequest struct {
-	ChatId          any   `json:"chat_id"`
-	MessageThreadId int64 `json:"message_thread_id"`
+	ChatId          interface{} `json:"chat_id"`
+	MessageThreadId int64       `json:"message_thread_id"`
 }
 
 type EditGeneralForumTopicRequest struct {
-	ChatId any    `json:"chat_id"`
-	Name   string `json:"name"`
+	ChatId interface{} `json:"chat_id"`
+	Name   string      `json:"name"`
 }
 
 type CloseGeneralForumTopicRequest struct {
-	ChatId any `json:"chat_id"`
+	ChatId interface{} `json:"chat_id"`
 }
 
 type ReopenGeneralForumTopicRequest struct {
-	ChatId any `json:"chat_id"`
+	ChatId interface{} `json:"chat_id"`
 }
 
 type HideGeneralForumTopicRequest struct {
-	ChatId any `json:"chat_id"`
+	ChatId interface{} `json:"chat_id"`
 }
 
 type UnhideGeneralForumTopicRequest struct {
-	ChatId any `json:"chat_id"`
+	ChatId interface{} `json:"chat_id"`
 }
 
 type UnpinAllGeneralForumTopicMessagesRequest struct {
-	ChatId any `json:"chat_id"`
+	ChatId interface{} `json:"chat_id"`
 }
 
 type AnswerCallbackQueryRequest struct {
@@ -663,8 +663,8 @@ type AnswerCallbackQueryRequest struct {
 }
 
 type GetUserChatBoostsRequest struct {
-	ChatId any   `json:"chat_id"`
-	UserId int64 `json:"user_id"`
+	ChatId interface{} `json:"chat_id"`
+	UserId int64       `json:"user_id"`
 }
 
 type GetBusinessConnectionRequest struct {
@@ -672,19 +672,19 @@ type GetBusinessConnectionRequest struct {
 }
 
 type SetMyCommandsRequest struct {
-	Commands     []BotCommand     `json:"commands"`
-	Scope        *BotCommandScope `json:"scope,omitempty"`
-	LanguageCode string           `json:"language_code,omitempty"`
+	Commands     []BotCommand    `json:"commands"`
+	Scope        BotCommandScope `json:"scope,omitempty"`
+	LanguageCode string          `json:"language_code,omitempty"`
 }
 
 type DeleteMyCommandsRequest struct {
-	Scope        *BotCommandScope `json:"scope,omitempty"`
-	LanguageCode string           `json:"language_code,omitempty"`
+	Scope        BotCommandScope `json:"scope,omitempty"`
+	LanguageCode string          `json:"language_code,omitempty"`
 }
 
 type GetMyCommandsRequest struct {
-	Scope        *BotCommandScope `json:"scope,omitempty"`
-	LanguageCode string           `json:"language_code,omitempty"`
+	Scope        BotCommandScope `json:"scope,omitempty"`
+	LanguageCode string          `json:"language_code,omitempty"`
 }
 
 type SetMyNameRequest struct {
@@ -715,8 +715,8 @@ type GetMyShortDescriptionRequest struct {
 }
 
 type SetChatMenuButtonRequest struct {
-	ChatId     int64       `json:"chat_id,omitempty"`
-	MenuButton *MenuButton `json:"menu_button,omitempty"`
+	ChatId     int64      `json:"chat_id,omitempty"`
+	MenuButton MenuButton `json:"menu_button,omitempty"`
 }
 
 type GetChatMenuButtonRequest struct {
@@ -734,7 +734,7 @@ type GetMyDefaultAdministratorRightsRequest struct {
 
 type SendGiftRequest struct {
 	UserId        int64           `json:"user_id,omitempty"`
-	ChatId        any             `json:"chat_id,omitempty"`
+	ChatId        interface{}     `json:"chat_id,omitempty"`
 	GiftId        string          `json:"gift_id"`
 	PayForUpgrade bool            `json:"pay_for_upgrade,omitempty"`
 	Text          string          `json:"text,omitempty"`
@@ -757,8 +757,8 @@ type VerifyUserRequest struct {
 }
 
 type VerifyChatRequest struct {
-	ChatId            any    `json:"chat_id"`
-	CustomDescription string `json:"custom_description,omitempty"`
+	ChatId            interface{} `json:"chat_id"`
+	CustomDescription string      `json:"custom_description,omitempty"`
 }
 
 type RemoveUserVerificationRequest struct {
@@ -766,7 +766,7 @@ type RemoveUserVerificationRequest struct {
 }
 
 type RemoveChatVerificationRequest struct {
-	ChatId any `json:"chat_id"`
+	ChatId interface{} `json:"chat_id"`
 }
 
 type ReadBusinessMessageRequest struct {
@@ -797,9 +797,9 @@ type SetBusinessAccountBioRequest struct {
 }
 
 type SetBusinessAccountProfilePhotoRequest struct {
-	BusinessConnectionId string             `json:"business_connection_id"`
-	Photo                *InputProfilePhoto `json:"photo"`
-	IsPublic             bool               `json:"is_public,omitempty"`
+	BusinessConnectionId string            `json:"business_connection_id"`
+	Photo                InputProfilePhoto `json:"photo"`
+	IsPublic             bool              `json:"is_public,omitempty"`
 }
 
 type RemoveBusinessAccountProfilePhotoRequest struct {
@@ -854,25 +854,25 @@ type TransferGiftRequest struct {
 }
 
 type PostStoryRequest struct {
-	BusinessConnectionId string             `json:"business_connection_id"`
-	Content              *InputStoryContent `json:"content"`
-	ActivePeriod         int64              `json:"active_period"`
-	Caption              string             `json:"caption,omitempty"`
-	ParseMode            string             `json:"parse_mode,omitempty"`
-	CaptionEntities      []MessageEntity    `json:"caption_entities,omitempty"`
-	Areas                []StoryArea        `json:"areas,omitempty"`
-	PostToChatPage       bool               `json:"post_to_chat_page,omitempty"`
-	ProtectContent       bool               `json:"protect_content,omitempty"`
+	BusinessConnectionId string            `json:"business_connection_id"`
+	Content              InputStoryContent `json:"content"`
+	ActivePeriod         int64             `json:"active_period"`
+	Caption              string            `json:"caption,omitempty"`
+	ParseMode            string            `json:"parse_mode,omitempty"`
+	CaptionEntities      []MessageEntity   `json:"caption_entities,omitempty"`
+	Areas                []StoryArea       `json:"areas,omitempty"`
+	PostToChatPage       bool              `json:"post_to_chat_page,omitempty"`
+	ProtectContent       bool              `json:"protect_content,omitempty"`
 }
 
 type EditStoryRequest struct {
-	BusinessConnectionId string             `json:"business_connection_id"`
-	StoryId              int64              `json:"story_id"`
-	Content              *InputStoryContent `json:"content"`
-	Caption              string             `json:"caption,omitempty"`
-	ParseMode            string             `json:"parse_mode,omitempty"`
-	CaptionEntities      []MessageEntity    `json:"caption_entities,omitempty"`
-	Areas                []StoryArea        `json:"areas,omitempty"`
+	BusinessConnectionId string            `json:"business_connection_id"`
+	StoryId              int64             `json:"story_id"`
+	Content              InputStoryContent `json:"content"`
+	Caption              string            `json:"caption,omitempty"`
+	ParseMode            string            `json:"parse_mode,omitempty"`
+	CaptionEntities      []MessageEntity   `json:"caption_entities,omitempty"`
+	Areas                []StoryArea       `json:"areas,omitempty"`
 }
 
 type DeleteStoryRequest struct {
@@ -882,7 +882,7 @@ type DeleteStoryRequest struct {
 
 type EditMessageTextRequest struct {
 	BusinessConnectionId string                `json:"business_connection_id,omitempty"`
-	ChatId               any                   `json:"chat_id,omitempty"`
+	ChatId               interface{}           `json:"chat_id,omitempty"`
 	MessageId            int64                 `json:"message_id,omitempty"`
 	InlineMessageId      string                `json:"inline_message_id,omitempty"`
 	Text                 string                `json:"text"`
@@ -894,7 +894,7 @@ type EditMessageTextRequest struct {
 
 type EditMessageCaptionRequest struct {
 	BusinessConnectionId  string                `json:"business_connection_id,omitempty"`
-	ChatId                any                   `json:"chat_id,omitempty"`
+	ChatId                interface{}           `json:"chat_id,omitempty"`
 	MessageId             int64                 `json:"message_id,omitempty"`
 	InlineMessageId       string                `json:"inline_message_id,omitempty"`
 	Caption               string                `json:"caption,omitempty"`
@@ -906,16 +906,16 @@ type EditMessageCaptionRequest struct {
 
 type EditMessageMediaRequest struct {
 	BusinessConnectionId string                `json:"business_connection_id,omitempty"`
-	ChatId               any                   `json:"chat_id,omitempty"`
+	ChatId               interface{}           `json:"chat_id,omitempty"`
 	MessageId            int64                 `json:"message_id,omitempty"`
 	InlineMessageId      string                `json:"inline_message_id,omitempty"`
-	Media                *InputMedia           `json:"media"`
+	Media                InputMedia            `json:"media"`
 	ReplyMarkup          *InlineKeyboardMarkup `json:"reply_markup,omitempty"`
 }
 
 type EditMessageLiveLocationRequest struct {
 	BusinessConnectionId string                `json:"business_connection_id,omitempty"`
-	ChatId               any                   `json:"chat_id,omitempty"`
+	ChatId               interface{}           `json:"chat_id,omitempty"`
 	MessageId            int64                 `json:"message_id,omitempty"`
 	InlineMessageId      string                `json:"inline_message_id,omitempty"`
 	Latitude             float64               `json:"latitude"`
@@ -929,7 +929,7 @@ type EditMessageLiveLocationRequest struct {
 
 type StopMessageLiveLocationRequest struct {
 	BusinessConnectionId string                `json:"business_connection_id,omitempty"`
-	ChatId               any                   `json:"chat_id,omitempty"`
+	ChatId               interface{}           `json:"chat_id,omitempty"`
 	MessageId            int64                 `json:"message_id,omitempty"`
 	InlineMessageId      string                `json:"inline_message_id,omitempty"`
 	ReplyMarkup          *InlineKeyboardMarkup `json:"reply_markup,omitempty"`
@@ -945,7 +945,7 @@ type EditMessageChecklistRequest struct {
 
 type EditMessageReplyMarkupRequest struct {
 	BusinessConnectionId string                `json:"business_connection_id,omitempty"`
-	ChatId               any                   `json:"chat_id,omitempty"`
+	ChatId               interface{}           `json:"chat_id,omitempty"`
 	MessageId            int64                 `json:"message_id,omitempty"`
 	InlineMessageId      string                `json:"inline_message_id,omitempty"`
 	ReplyMarkup          *InlineKeyboardMarkup `json:"reply_markup,omitempty"`
@@ -953,7 +953,7 @@ type EditMessageReplyMarkupRequest struct {
 
 type StopPollRequest struct {
 	BusinessConnectionId string                `json:"business_connection_id,omitempty"`
-	ChatId               any                   `json:"chat_id"`
+	ChatId               interface{}           `json:"chat_id"`
 	MessageId            int64                 `json:"message_id"`
 	ReplyMarkup          *InlineKeyboardMarkup `json:"reply_markup,omitempty"`
 }
@@ -971,21 +971,21 @@ type DeclineSuggestedPostRequest struct {
 }
 
 type DeleteMessageRequest struct {
-	ChatId    any   `json:"chat_id"`
-	MessageId int64 `json:"message_id"`
+	ChatId    interface{} `json:"chat_id"`
+	MessageId int64       `json:"message_id"`
 }
 
 type DeleteMessagesRequest struct {
-	ChatId     any     `json:"chat_id"`
-	MessageIds []int64 `json:"message_ids"`
+	ChatId     interface{} `json:"chat_id"`
+	MessageIds []int64     `json:"message_ids"`
 }
 
 type SendStickerRequest struct {
 	BusinessConnectionId    string                   `json:"business_connection_id,omitempty"`
-	ChatId                  any                      `json:"chat_id"`
+	ChatId                  interface{}              `json:"chat_id"`
 	MessageThreadId         int64                    `json:"message_thread_id,omitempty"`
 	DirectMessagesTopicId   int64                    `json:"direct_messages_topic_id,omitempty"`
-	Sticker                 any                      `json:"sticker"`
+	Sticker                 InputFile                `json:"sticker"`
 	Emoji                   string                   `json:"emoji,omitempty"`
 	DisableNotification     bool                     `json:"disable_notification,omitempty"`
 	ProtectContent          bool                     `json:"protect_content,omitempty"`
@@ -993,7 +993,7 @@ type SendStickerRequest struct {
 	MessageEffectId         string                   `json:"message_effect_id,omitempty"`
 	SuggestedPostParameters *SuggestedPostParameters `json:"suggested_post_parameters,omitempty"`
 	ReplyParameters         *ReplyParameters         `json:"reply_parameters,omitempty"`
-	ReplyMarkup             any                      `json:"reply_markup,omitempty"`
+	ReplyMarkup             interface{}              `json:"reply_markup,omitempty"`
 }
 
 type GetStickerSetRequest struct {
@@ -1005,9 +1005,9 @@ type GetCustomEmojiStickersRequest struct {
 }
 
 type UploadStickerFileRequest struct {
-	UserId        int64      `json:"user_id"`
-	Sticker       *InputFile `json:"sticker"`
-	StickerFormat string     `json:"sticker_format"`
+	UserId        int64     `json:"user_id"`
+	Sticker       InputFile `json:"sticker"`
+	StickerFormat string    `json:"sticker_format"`
 }
 
 type CreateNewStickerSetRequest struct {
@@ -1062,10 +1062,10 @@ type SetStickerSetTitleRequest struct {
 }
 
 type SetStickerSetThumbnailRequest struct {
-	Name      string `json:"name"`
-	UserId    int64  `json:"user_id"`
-	Thumbnail any    `json:"thumbnail,omitempty"`
-	Format    string `json:"format"`
+	Name      string    `json:"name"`
+	UserId    int64     `json:"user_id"`
+	Thumbnail InputFile `json:"thumbnail,omitempty"`
+	Format    string    `json:"format"`
 }
 
 type SetCustomEmojiStickerSetThumbnailRequest struct {
@@ -1087,21 +1087,21 @@ type AnswerInlineQueryRequest struct {
 }
 
 type AnswerWebAppQueryRequest struct {
-	WebAppQueryId string             `json:"web_app_query_id"`
-	Result        *InlineQueryResult `json:"result"`
+	WebAppQueryId string            `json:"web_app_query_id"`
+	Result        InlineQueryResult `json:"result"`
 }
 
 type SavePreparedInlineMessageRequest struct {
-	UserId            int64              `json:"user_id"`
-	Result            *InlineQueryResult `json:"result"`
-	AllowUserChats    bool               `json:"allow_user_chats,omitempty"`
-	AllowBotChats     bool               `json:"allow_bot_chats,omitempty"`
-	AllowGroupChats   bool               `json:"allow_group_chats,omitempty"`
-	AllowChannelChats bool               `json:"allow_channel_chats,omitempty"`
+	UserId            int64             `json:"user_id"`
+	Result            InlineQueryResult `json:"result"`
+	AllowUserChats    bool              `json:"allow_user_chats,omitempty"`
+	AllowBotChats     bool              `json:"allow_bot_chats,omitempty"`
+	AllowGroupChats   bool              `json:"allow_group_chats,omitempty"`
+	AllowChannelChats bool              `json:"allow_channel_chats,omitempty"`
 }
 
 type SendInvoiceRequest struct {
-	ChatId                    any                      `json:"chat_id"`
+	ChatId                    interface{}              `json:"chat_id"`
 	MessageThreadId           int64                    `json:"message_thread_id,omitempty"`
 	DirectMessagesTopicId     int64                    `json:"direct_messages_topic_id,omitempty"`
 	Title                     string                   `json:"title"`
