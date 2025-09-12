@@ -1,5 +1,7 @@
 package models
 
+import "io"
+
 type Update struct {
 	UpdateId                int64                        `json:"update_id"`
 	Message                 *Message                     `json:"message,omitempty"`
@@ -1523,14 +1525,12 @@ type ResponseParameters struct {
 }
 
 // contains subtypes
-type InputMedia struct {
-	Type InputMediaType
+type InputMedia interface {
+	isInputMedia()
 
-	InputMediaAnimation *InputMediaAnimation
-	InputMediaDocument  *InputMediaDocument
-	InputMediaAudio     *InputMediaAudio
-	InputMediaPhoto     *InputMediaPhoto
-	InputMediaVideo     *InputMediaVideo
+	GetData() io.Reader
+	GetMedia() string
+	MarshalInputMedia() ([]byte, error)
 }
 
 type InputMediaPhoto struct {
@@ -1541,6 +1541,8 @@ type InputMediaPhoto struct {
 	CaptionEntities       []MessageEntity `json:"caption_entities,omitempty"`
 	ShowCaptionAboveMedia bool            `json:"show_caption_above_media,omitempty"`
 	HasSpoiler            bool            `json:"has_spoiler,omitempty"`
+
+	Data io.Reader `json:"-"`
 }
 
 type InputMediaVideo struct {
@@ -1558,6 +1560,8 @@ type InputMediaVideo struct {
 	Duration              int64           `json:"duration,omitempty"`
 	SupportsStreaming     bool            `json:"supports_streaming,omitempty"`
 	HasSpoiler            bool            `json:"has_spoiler,omitempty"`
+
+	Data io.Reader `json:"-"`
 }
 
 type InputMediaAnimation struct {
@@ -1572,6 +1576,8 @@ type InputMediaAnimation struct {
 	Height                int64           `json:"height,omitempty"`
 	Duration              int64           `json:"duration,omitempty"`
 	HasSpoiler            bool            `json:"has_spoiler,omitempty"`
+
+	Data io.Reader `json:"-"`
 }
 
 type InputMediaAudio struct {
@@ -1584,6 +1590,8 @@ type InputMediaAudio struct {
 	Duration        int64           `json:"duration,omitempty"`
 	Performer       string          `json:"performer,omitempty"`
 	Title           string          `json:"title,omitempty"`
+
+	Data io.Reader `json:"-"`
 }
 
 type InputMediaDocument struct {
@@ -1594,6 +1602,8 @@ type InputMediaDocument struct {
 	ParseMode                   string          `json:"parse_mode,omitempty"`
 	CaptionEntities             []MessageEntity `json:"caption_entities,omitempty"`
 	DisableContentTypeDetection bool            `json:"disable_content_type_detection,omitempty"`
+
+	Data io.Reader `json:"-"`
 }
 
 type InputFile interface {
@@ -1601,16 +1611,19 @@ type InputFile interface {
 }
 
 // contains subtypes
-type InputPaidMedia struct {
-	Type InputPaidMediaType
+type InputPaidMedia interface {
+	isInputPaidMedia()
 
-	InputPaidMediaPhoto *InputPaidMediaPhoto
-	InputPaidMediaVideo *InputPaidMediaVideo
+	GetData() io.Reader
+	GetMedia() string
+	MarshalInputMedia() ([]byte, error)
 }
 
 type InputPaidMediaPhoto struct {
 	Type  string `json:"type"`
 	Media string `json:"media"`
+
+	Data io.Reader `json:"-"`
 }
 
 type InputPaidMediaVideo struct {
@@ -1623,6 +1636,8 @@ type InputPaidMediaVideo struct {
 	Height            int64  `json:"height,omitempty"`
 	Duration          int64  `json:"duration,omitempty"`
 	SupportsStreaming bool   `json:"supports_streaming,omitempty"`
+
+	Data io.Reader `json:"-"`
 }
 
 // contains subtypes
