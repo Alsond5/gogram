@@ -41,6 +41,8 @@ func writeParamsToForm[T any](form *multipart.Writer, params *T) error {
 		switch vv := v.Field(i).Interface().(type) {
 		case models.InputMedia:
 			err = addFormFieldInputMedia(form, fieldName, vv)
+		case models.InlineQueryResult:
+			err = addFormFieldInlineQueryResultItem(form, fieldName, vv)
 		case string:
 			err = addFormFieldString(form, fieldName, vv)
 		case *models.InputFileUpload:
@@ -61,6 +63,8 @@ func writeParamsToForm[T any](form *multipart.Writer, params *T) error {
 			}
 
 			err = addFormFieldInputMediaSlice(form, fieldName, ss)
+		case []models.InlineQueryResult:
+			err = addFormFieldInlineQueryResultSlice(form, fieldName, vv)
 		default:
 			err = addFormFieldDefault(form, fieldName, vv)
 		}
@@ -139,6 +143,41 @@ func addFormFieldInputFileUpload(form *multipart.Writer, fieldName string, value
 	}
 
 	_, err = io.Copy(w, value.Data)
+	return err
+}
+
+func addFormFieldInlineQueryResultItem(form *multipart.Writer, fieldName string, value models.InlineQueryResult) error {
+	data, err := value.MarshalCustom()
+	if err != nil {
+		return err
+	}
+
+	w, err := form.CreateFormField(fieldName)
+	if err != nil {
+		return err
+	}
+
+	_, err = io.Copy(w, bytes.NewReader(data))
+	return err
+}
+
+func addFormFieldInlineQueryResultSlice(form *multipart.Writer, fieldName string, value []models.InlineQueryResult) error {
+	var fields []string
+	for _, media := range value {
+		data, err := media.MarshalCustom()
+		if err != nil {
+			return err
+		}
+
+		fields = append(fields, string(data))
+	}
+
+	w, err := form.CreateFormField(fieldName)
+	if err != nil {
+		return err
+	}
+
+	_, err = io.Copy(w, strings.NewReader("["+strings.Join(fields, ",")+"]"))
 	return err
 }
 

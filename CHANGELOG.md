@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.3.1 (12-09-2025)
+
+- Refactored `InlineQueryResult` into an interface.
+- Each `InlineQueryResult` type (`Article`, `Photo`, `Video`, etc.) now implements:
+  - `isInlineQueryResult()` marker
+  - `MarshalCustom()` for JSON serialization with the correct `"type"` field.
+- This improves extensibility and clarity over the previous single-struct + `MarshalJSON` override approach.
+
 ## v0.3.0 (12-09-2025)
 
 - Added support for `InputMedia` (photo, video, animation, document & audio) in Telegram bot API
