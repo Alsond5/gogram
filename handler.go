@@ -1,7 +1,6 @@
 package gogram
 
 import (
-	"context"
 	"regexp"
 	"strings"
 
@@ -29,13 +28,13 @@ const (
 	matchTypeFunc
 )
 
-type HandlerFunc func(ctx context.Context, bot *Bot, update *models.Update)
+type Handler func(c *Context) error
 type MatchFunc func(upd *models.Update) bool
 
 type handler struct {
 	handlerType HandlerType
 	matchType   MatchType
-	handler     HandlerFunc
+	routes      []Handler
 
 	pattern   string
 	re        *regexp.Regexp
@@ -122,27 +121,30 @@ func (h *handler) match(upd *models.Update) bool {
 	return false
 }
 
-func (b *Bot) OnStartCommand(handlerFunc HandlerFunc) {
-	b.RegisterCommandHandler("start", handlerFunc)
+func (b *Bot) OnStartCommand(handler Handler) {
+	b.RegisterCommandHandler("start", handler)
 }
 
-func (b *Bot) OnHelpCommand(handlerFunc HandlerFunc) {
-	b.RegisterCommandHandler("help", handlerFunc)
+func (b *Bot) OnHelpCommand(handler Handler) {
+	b.RegisterCommandHandler("help", handler)
 }
 
-func (b *Bot) RegisterCommandHandler(command string, handlerFunc HandlerFunc) {
-	b.RegisterHandler(HandlerTypeMessageText, command, MatchTypeCommandStartOnly, handlerFunc)
+func (b *Bot) RegisterCommandHandler(command string, handler Handler) {
+	b.RegisterHandler(HandlerTypeMessageText, command, MatchTypeCommandStartOnly, handler)
 }
 
-func (b *Bot) RegisterHandler(handlerType HandlerType, pattern string, matchType MatchType, handlerFunc HandlerFunc) {
+func (b *Bot) RegisterHandler(handlerType HandlerType, pattern string, matchType MatchType, handlers ...Handler) {
 	b.handlersMx.Lock()
 	defer b.handlersMx.Unlock()
+
+	stack := append([]Handler{}, b.middlewares...)
+	stack = append(stack, handlers...)
 
 	h := handler{
 		pattern:     pattern,
 		handlerType: handlerType,
 		matchType:   matchType,
-		handler:     handlerFunc,
+		routes:      stack,
 	}
 
 	b.handlers = append(b.handlers, h)

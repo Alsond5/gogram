@@ -33,7 +33,7 @@ type Bot struct {
 	lastUpdateID       int64
 	handlersMx         sync.RWMutex
 	handlers           []handler
-	middlewares        []Middleware
+	middlewares        []Handler
 	client             HttpClient
 	updates            chan *models.Update
 }
@@ -84,4 +84,8 @@ func (b *Bot) Start(ctx context.Context) {
 	}
 
 	wg.Wait()
+}
+
+func (b *Bot) Use(handler Handler) {
+	b.middlewares = append(b.middlewares, handler)
 }

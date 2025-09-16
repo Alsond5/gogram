@@ -8,46 +8,42 @@ import (
 	"github.com/Alsond5/gogram/models"
 )
 
-func defaultHandler(_ context.Context, _ *Bot, upd *models.Update) {
-	b, err := json.Marshal(upd)
+func defaultHandler(c *Context) error {
+	b, err := json.Marshal(c.Update)
 	if err != nil {
-		return
+		return err
 	}
 
 	fmt.Printf("[UPDATE] %s\n", b)
-}
 
-func wrapMiddlewares(h HandlerFunc, m ...Middleware) HandlerFunc {
-	if len(m) < 1 {
-		return h
-	}
-
-	wrapped := h
-	for i := len(m) - 1; i >= 0; i-- {
-		wrapped = m[i](wrapped)
-	}
-
-	return wrapped
+	return nil
 }
 
 func (b *Bot) processUpdate(ctx context.Context, upd *models.Update) {
-	handler := b.findHandler(upd)
+	handlers := b.findHandler(upd)
 
-	w := wrapMiddlewares(handler, b.middlewares...)
-	go w(ctx, b, upd)
+	c := &Context{
+		Ctx:      ctx,
+		Bot:      b,
+		Update:   upd,
+		handlers: handlers,
+		index:    -1,
+	}
+
+	go c.Next()
 }
 
-func (b *Bot) findHandler(upd *models.Update) HandlerFunc {
+func (b *Bot) findHandler(upd *models.Update) []Handler {
 	b.handlersMx.RLock()
 	defer b.handlersMx.RUnlock()
 
 	for _, h := range b.handlers {
 		if h.match(upd) {
-			return h.handler
+			return h.routes
 		}
 	}
 
-	return defaultHandler
+	return []Handler{defaultHandler}
 }
 
 func (b *Bot) Command(upd *models.Update) string {

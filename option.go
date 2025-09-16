@@ -8,7 +8,7 @@ func SetWorkers(count int) Option {
 	}
 }
 
-func SetMiddlewares(middlewares ...Middleware) Option {
+func SetMiddlewares(middlewares ...Handler) Option {
 	return func(b *Bot) {
 		b.middlewares = append(b.middlewares, middlewares...)
 	}

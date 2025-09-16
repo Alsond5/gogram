@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.4.0 (16-09-2025)
+
+- Refactored middleware system to per-command middleware:
+  - Each registered command now maintains its own middleware stack.
+  - Global middlewares are still supported via `Use()`.
+  - Middleware chain is now executed sequentially per command without rebuilding the full stack on each update.
+- Introduced `Context` struct to wrap `bot` and `update` parameters:
+  - All handlers now receive `*Context` instead of `(ctx, bot, update)`.
+  - Added `Next()` and `Abort()` methods to control middleware flow.
+- Simplified handler signatures and improved error propagation within middleware chain.
+
 ## v0.3.1 (12-09-2025)
 
 - Refactored `InlineQueryResult` into an interface.

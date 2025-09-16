@@ -1,3 +1,3 @@
 package gogram
 
-type Middleware func(next HandlerFunc) HandlerFunc
+type Middleware func() Handler
