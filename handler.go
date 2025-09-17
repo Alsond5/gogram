@@ -121,16 +121,16 @@ func (h *handler) match(upd *models.Update) bool {
 	return false
 }
 
-func (b *Bot) OnStartCommand(handler Handler) {
-	b.RegisterCommandHandler("start", handler)
+func (b *Bot) OnStartCommand(handlers ...Handler) {
+	b.RegisterCommandHandler("start", handlers...)
 }
 
-func (b *Bot) OnHelpCommand(handler Handler) {
-	b.RegisterCommandHandler("help", handler)
+func (b *Bot) OnHelpCommand(handlers ...Handler) {
+	b.RegisterCommandHandler("help", handlers...)
 }
 
-func (b *Bot) RegisterCommandHandler(command string, handler Handler) {
-	b.RegisterHandler(HandlerTypeMessageText, command, MatchTypeCommandStartOnly, handler)
+func (b *Bot) RegisterCommandHandler(command string, handlers ...Handler) {
+	b.RegisterHandler(HandlerTypeMessageText, command, MatchTypeCommandStartOnly, handlers...)
 }
 
 func (b *Bot) RegisterHandler(handlerType HandlerType, pattern string, matchType MatchType, handlers ...Handler) {
