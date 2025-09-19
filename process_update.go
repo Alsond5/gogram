@@ -23,11 +23,12 @@ func (b *Bot) processUpdate(ctx context.Context, upd *models.Update) {
 	handlers := b.findHandler(upd)
 
 	c := &Context{
-		Ctx:      ctx,
-		Bot:      b,
-		Update:   upd,
-		handlers: handlers,
-		index:    -1,
+		Ctx:          ctx,
+		Bot:          b,
+		Update:       upd,
+		handlers:     handlers,
+		handlerCount: len(handlers),
+		index:        -1,
 	}
 
 	go c.Next()
@@ -39,7 +40,21 @@ func (b *Bot) findHandler(upd *models.Update) []Handler {
 
 	for _, h := range b.handlers {
 		if h.match(upd) {
-			return h.routes
+			middlewareCount := h.middlewareSnapshot
+
+			if middlewareCount == 0 {
+				return h.routes
+			}
+
+			middlewares := b.getMiddlewares(middlewareCount)
+
+			totalLen := middlewareCount + len(h.routes)
+			routes := make([]Handler, totalLen)
+
+			copy(routes, middlewares)
+			copy(routes[middlewareCount:], h.routes)
+
+			return routes
 		}
 	}
 

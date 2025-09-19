@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"strings"
 	"sync"
+	"sync/atomic"
 	"time"
 
 	"github.com/Alsond5/gogram/models"
@@ -31,9 +32,11 @@ type Bot struct {
 	requestTimeout     time.Duration
 	webhookSecretToken string
 	lastUpdateID       int64
-	handlersMx         sync.RWMutex
 	handlers           []handler
+	handlersMx         sync.RWMutex
 	middlewares        []Handler
+	middlewaresMx      sync.RWMutex
+	middlewareCount    int64
 	client             HttpClient
 	updates            chan *models.Update
 }
@@ -87,5 +90,36 @@ func (b *Bot) Start(ctx context.Context) {
 }
 
 func (b *Bot) Use(handler Handler) {
+	b.middlewaresMx.Lock()
+	defer b.middlewaresMx.Unlock()
+
 	b.middlewares = append(b.middlewares, handler)
+	atomic.AddInt64(&b.middlewareCount, 1)
+}
+
+func (b *Bot) getMiddlewareCount() int {
+	return int(atomic.LoadInt64(&b.middlewareCount))
+}
+
+func (b *Bot) getMiddlewares(count int) []Handler {
+	if count < 0 {
+		return nil
+	}
+
+	b.middlewaresMx.RLock()
+	defer b.middlewaresMx.RUnlock()
+
+	total := len(b.middlewares)
+	if total == 0 {
+		return nil
+	}
+
+	if count > total {
+		count = total
+	}
+
+	result := make([]Handler, count)
+	copy(result, b.middlewares[:count])
+
+	return result
 }

@@ -32,13 +32,14 @@ type Handler func(c *Context) error
 type MatchFunc func(upd *models.Update) bool
 
 type handler struct {
+	middlewareSnapshot int
+	routes             []Handler
+
 	handlerType HandlerType
 	matchType   MatchType
-	routes      []Handler
-
-	pattern   string
-	re        *regexp.Regexp
-	matchFunc MatchFunc
+	pattern     string
+	re          *regexp.Regexp
+	matchFunc   MatchFunc
 }
 
 func (h *handler) match(upd *models.Update) bool {
@@ -137,14 +138,14 @@ func (b *Bot) RegisterHandler(handlerType HandlerType, pattern string, matchType
 	b.handlersMx.Lock()
 	defer b.handlersMx.Unlock()
 
-	stack := append([]Handler{}, b.middlewares...)
-	stack = append(stack, handlers...)
+	stack := append([]Handler{}, handlers...)
 
 	h := handler{
-		pattern:     pattern,
-		handlerType: handlerType,
-		matchType:   matchType,
-		routes:      stack,
+		routes:             stack,
+		middlewareSnapshot: b.getMiddlewareCount(),
+		pattern:            pattern,
+		handlerType:        handlerType,
+		matchType:          matchType,
 	}
 
 	b.handlers = append(b.handlers, h)

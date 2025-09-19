@@ -7,17 +7,18 @@ import (
 )
 
 type Context struct {
-	Ctx      context.Context
-	Bot      *Bot
-	Update   *models.Update
-	handlers []Handler
-	index    int
+	Ctx          context.Context
+	Bot          *Bot
+	Update       *models.Update
+	handlers     []Handler
+	handlerCount int
+	index        int
 }
 
 func (c *Context) Next() error {
 	c.index++
 
-	if c.index >= len(c.handlers) {
+	if c.index >= c.handlerCount {
 		return nil
 	}
 
@@ -25,5 +26,5 @@ func (c *Context) Next() error {
 }
 
 func (c *Context) Abort() {
-	c.index = len(c.handlers)
+	c.index = c.handlerCount
 }

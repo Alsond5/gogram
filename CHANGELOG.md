@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.1 (19-09-2025)
+
+- Middleware execution optimized: avoids unnecessary slice copying
+- Added thread-safety for middleware and handler execution using mutex/atomic
+- `Next()` flow updated for better performance and safety
+
 ## 0.4.0 (16-09-2025)
 
 - Refactored middleware system to per-command middleware:
